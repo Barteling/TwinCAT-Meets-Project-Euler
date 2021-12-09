@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.17">
+	<Project ProjectGUID="{A2A135E6-6F47-4F68-A67E-4D4DE911B884}" TargetNetId="5.84.184.238.1.1" ShowHideConfigurations="#x106">
+		<Plc>
+			<Project File="ProjectEuler.xti"/>
+		</Plc>
+	</Project>
+</TcSmProject>

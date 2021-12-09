@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="Problem1Test" Id="{8fc21e6d-9ed7-4dab-8911-6417cccd286f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Problem1Test EXTENDS TcUnit.FB_TestSuite
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+    _problem_1 : Problem1;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[TEST('Problem 1');
+_problem_1.Execute := TRUE;
+_problem_1();
+AssertTrue(Condition := _problem_1.Done, Message := 'The problem solver did not finished within the expected amount of cycles.');
+AssertEquals_STRING(Expected := '233168', Actual := _problem_1.Result, Message := 'The problem solver did not return the correct answer.');
+TEST_FINISHED();]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

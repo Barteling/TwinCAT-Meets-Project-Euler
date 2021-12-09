@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="FbProblemSolverBase" Id="{1adb2cd0-fe84-4e79-99cf-4ba29322b157}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'hide_all_locals'}
+FUNCTION_BLOCK ABSTRACT FbProblemSolverBase
+VAR
+    _execute : BOOL;
+    _busy : BOOL;
+    _done : BOOL;
+    _result : STRING;
+    _state : (
+        Idle,
+        Executing,
+        Resetting
+    );
+
+    _resetDoneOnFallingEdgeExecute : BOOL;
+END_VAR
+VAR_TEMP
+    _again : BOOL;
+    _complete : BOOL;
+    _tempResult : STRING;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[REPEAT
+    _again := FALSE;
+
+    CASE _state OF
+        Idle:
+            IF Execute THEN
+                _state := _state + 1;
+                Busy := TRUE;
+                Done := FALSE;
+                _again := TRUE;
+            END_IF
+
+        Executing:
+            CyclicAction(complete => _complete, result => _tempResult);
+
+            IF _complete THEN
+                _state := _state + 1;
+                _again := TRUE;
+                Result := _tempResult;
+                Busy := FALSE;
+                Done := TRUE;
+            END_IF
+
+        Resetting:
+            IF NOT Execute THEN
+                ResetAction(complete => _complete);
+
+                IF _resetDoneOnFallingEdgeExecute THEN
+                    Done := FALSE;
+                END_IF
+
+                IF _complete THEN
+                    _state := 0;
+                    _again := TRUE;
+                END_IF
+            ELSE
+                _resetDoneOnFallingEdgeExecute := TRUE;
+            END_IF
+    END_CASE
+UNTIL NOT _again
+END_REPEAT]]></ST>
+    </Implementation>
+    <Property Name="Busy" Id="{70f6f3b6-4064-4268-95aa-29c6bb83dfcf}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY PUBLIC Busy : BOOL]]></Declaration>
+      <Get Name="Get" Id="{fb7b6e94-c8bb-45f2-992c-61ab5bde085c}">
+        <Declaration><![CDATA[VAR
+END_VAR]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Busy := _busy;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{be6571fb-db03-4c38-a81b-c5ccdc056d0a}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_busy := Busy;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="CyclicAction" Id="{86532a9c-24d7-4cc1-9bb5-733864eddf2e}">
+      <Declaration><![CDATA[METHOD PROTECTED ABSTRACT CyclicAction
+VAR_OUTPUT
+	complete : BOOL;
+	result : STRING;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Done" Id="{5b136d9a-37c9-4b0f-a778-b9c8de58e17b}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY PUBLIC Done : BOOL]]></Declaration>
+      <Get Name="Get" Id="{3238e6bd-a78d-420d-8efe-c7d55b378b30}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Done := _done;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{f71a6a51-5761-4d7e-85c8-b542c54e722b}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_done := Done;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="Execute" Id="{13221222-0752-4c8a-a039-dee736a4faf6}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY Execute : BOOL]]></Declaration>
+      <Get Name="Get" Id="{69c962b4-2c11-4828-aa75-b13ed5001536}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Execute := _execute;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{a81c4e73-8384-4b73-8580-9782e481dd91}">
+        <Declaration><![CDATA[VAR
+END_VAR]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_execute := Execute;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="ResetAction" Id="{ea41fd32-d33e-48cd-8b28-b823dd958f85}">
+      <Declaration><![CDATA[METHOD PROTECTED ResetAction
+VAR_OUTPUT
+    complete : BOOL;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[complete := true;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Result" Id="{5b3399fc-020e-4dde-84e1-508e310b698c}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY PUBLIC Result : STRING]]></Declaration>
+      <Get Name="Get" Id="{a56e8a53-1891-46a3-a433-008042a35c75}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Result := _result;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{ef3acb71-3433-49ac-a45f-ef03b9657fa0}">
+        <Declaration><![CDATA[]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[_result := Result;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+  </POU>
+</TcPlcObject>
