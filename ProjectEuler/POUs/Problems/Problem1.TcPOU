@@ -13,8 +13,8 @@ VAR_OUTPUT
     result : STRING;
 END_VAR
 VAR
-    _i : INT;
-	_sum : INT;
+    _i : LINT;
+	_sum : LINT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[(*Multiples OF 3 OR 5  
@@ -27,7 +27,7 @@ FOR _i := 0 TO 999 DO
     END_IF
 END_FOR
 
-_result := INT_TO_STRING(_sum);
+result := LINT_TO_STRING(_sum);
 complete := TRUE;]]></ST>
       </Implementation>
     </Method>
