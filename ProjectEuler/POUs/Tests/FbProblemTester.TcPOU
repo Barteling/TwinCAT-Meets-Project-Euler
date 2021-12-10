@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="FbProblemTester" Id="{8fc21e6d-9ed7-4dab-8911-6417cccd286f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FbProblemTester EXTENDS TcUnit.FB_TestSuite
+VAR
+    _problem : IProblemSolver;
+    _expectedResult : STRING;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[TEST(TestName := '');
+_problem.Execute := TRUE;
+_problem.Cyclic();
+AssertTrue(Condition := _problem.Done, Message := 'The problem solver did not finished within the expected amount of cycles.');
+AssertEquals_STRING(Expected := _expectedResult, Actual := _problem.Result, Message := 'The problem solver did not return the correct answer.');
+TEST_FINISHED();]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{bda51afe-9882-4a88-8aab-be632de375b5}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+    bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+    bInCopyCode : BOOL; // if TRUE, the instance afterwards gets moved into the copy code (online change)
+    problemSolver : IProblemSolver;
+    expectedResult : STRING;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_problem := problemSolver;
+_expectedResult := expectedResult;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <Itf Name="IProblemSolver" Id="{c4c57964-855d-45ac-84ad-31b96549bf8a}">
+    <Declaration><![CDATA[INTERFACE IProblemSolver]]></Declaration>
+    <Property Name="Busy" Id="{e5c48a59-3d68-47c0-8feb-532ba10b612b}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY Busy : BOOL]]></Declaration>
+      <Get Name="Get" Id="{492793da-1f25-4862-bfbd-2be7cdc56ae2}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="Cyclic" Id="{3549b86f-c26b-489f-91e4-aae6777c39c3}">
+      <Declaration><![CDATA[METHOD Cyclic
+VAR_INPUT
+END_VAR]]></Declaration>
+    </Method>
+    <Property Name="Done" Id="{9ae5d88c-0ab3-4a00-a5ab-5c37e604f5a4}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY Done : BOOL]]></Declaration>
+      <Get Name="Get" Id="{826a1a3b-1768-4118-9a04-fd4bb2c4606a}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Execute" Id="{a9a15e64-d2b1-4890-8afd-20a8457aafe1}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY Execute : BOOL]]></Declaration>
+      <Get Name="Get" Id="{592c97ec-72cc-48c8-917d-5d77397b420c}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+      <Set Name="Set" Id="{b4bf8e22-2582-4ca1-99d6-bc3096e1713f}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Set>
+    </Property>
+    <Property Name="Result" Id="{0400f9c4-26b0-4036-bc79-3e2c51990e81}">
+      <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
+PROPERTY Result : String]]></Declaration>
+      <Get Name="Get" Id="{e3d8f407-ba19-46f8-824b-bca2dcf505b2}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

@@ -25,6 +25,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="POUs\Problems" />
+    <Folder Include="POUs\Problems\Base" />
     <Folder Include="POUs\Tests" />
     <Folder Include="POUs" />
   </ItemGroup>
@@ -32,16 +33,22 @@
     <Compile Include="PlcTestTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\FbProblemSolverBase.TcPOU">
+    <Compile Include="POUs\PRG_TEST.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\PRG_TEST.TcPOU">
+    <Compile Include="POUs\Problems\Base\FbProblemSolverBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Problems\Base\IProblemSolver.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="POUs\Problems\Problem1.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="POUs\Tests\Problem1Test.TcPOU">
+    <Compile Include="POUs\Problems\Problem2.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Tests\FbProblemTester.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

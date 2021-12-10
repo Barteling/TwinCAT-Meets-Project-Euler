@@ -2,7 +2,7 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="FbProblemSolverBase" Id="{1adb2cd0-fe84-4e79-99cf-4ba29322b157}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute 'hide_all_locals'}
-FUNCTION_BLOCK ABSTRACT FbProblemSolverBase
+FUNCTION_BLOCK ABSTRACT FbProblemSolverBase IMPLEMENTS IProblemSolver
 VAR
     _execute : BOOL;
     _busy : BOOL;
@@ -29,8 +29,8 @@ END_VAR]]></Declaration>
         Idle:
             IF Execute THEN
                 _state := _state + 1;
-                Busy := TRUE;
-                Done := FALSE;
+                _busy := TRUE;
+                _done := FALSE;
                 _again := TRUE;
             END_IF
 
@@ -40,9 +40,9 @@ END_VAR]]></Declaration>
             IF _complete THEN
                 _state := _state + 1;
                 _again := TRUE;
-                Result := _tempResult;
-                Busy := FALSE;
-                Done := TRUE;
+                _result := _tempResult;
+                _busy := FALSE;
+                _done := TRUE;
             END_IF
 
         Resetting:
@@ -50,7 +50,7 @@ END_VAR]]></Declaration>
                 ResetAction(complete => _complete);
 
                 IF _resetDoneOnFallingEdgeExecute THEN
-                    Done := FALSE;
+                    _done := FALSE;
                 END_IF
 
                 IF _complete THEN
@@ -74,18 +74,18 @@ END_VAR]]></Declaration>
           <ST><![CDATA[Busy := _busy;]]></ST>
         </Implementation>
       </Get>
-      <Set Name="Set" Id="{be6571fb-db03-4c38-a81b-c5ccdc056d0a}">
-        <Declaration><![CDATA[]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[_busy := Busy;]]></ST>
-        </Implementation>
-      </Set>
     </Property>
+    <Method Name="Cyclic" Id="{a495b4fd-a538-4578-b75f-c86e494d9488}">
+      <Declaration><![CDATA[METHOD PUBLIC Cyclic]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[this^();]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="CyclicAction" Id="{86532a9c-24d7-4cc1-9bb5-733864eddf2e}">
       <Declaration><![CDATA[METHOD PROTECTED ABSTRACT CyclicAction
 VAR_OUTPUT
-	complete : BOOL;
-	result : STRING;
+    complete : BOOL;
+    result : STRING;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
@@ -100,12 +100,6 @@ PROPERTY PUBLIC Done : BOOL]]></Declaration>
           <ST><![CDATA[Done := _done;]]></ST>
         </Implementation>
       </Get>
-      <Set Name="Set" Id="{f71a6a51-5761-4d7e-85c8-b542c54e722b}">
-        <Declaration><![CDATA[]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[_done := Done;]]></ST>
-        </Implementation>
-      </Set>
     </Property>
     <Property Name="Execute" Id="{13221222-0752-4c8a-a039-dee736a4faf6}">
       <Declaration><![CDATA[{attribute 'monitoring' := 'call'}
@@ -142,12 +136,6 @@ PROPERTY PUBLIC Result : STRING]]></Declaration>
           <ST><![CDATA[Result := _result;]]></ST>
         </Implementation>
       </Get>
-      <Set Name="Set" Id="{ef3acb71-3433-49ac-a45f-ef03b9657fa0}">
-        <Declaration><![CDATA[]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[_result := Result;]]></ST>
-        </Implementation>
-      </Set>
     </Property>
   </POU>
 </TcPlcObject>

@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
   <POU Name="Problem1" Id="{482e4a30-c6a3-4be0-96ab-c9e4d85b8c7e}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FINAL Problem1 EXTENDS FbProblemSolverBase
-]]></Declaration>
+    <Declaration><![CDATA[FUNCTION_BLOCK FINAL Problem1 EXTENDS FbProblemSolverBase]]></Declaration>
     <Implementation>
       <ST><![CDATA[super^();]]></ST>
     </Implementation>
@@ -14,7 +13,7 @@ VAR_OUTPUT
 END_VAR
 VAR
     _i : LINT;
-	_sum : LINT;
+    _sum : LINT;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[(*Multiples OF 3 OR 5  

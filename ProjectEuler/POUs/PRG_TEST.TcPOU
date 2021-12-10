@@ -3,7 +3,10 @@
   <POU Name="PRG_TEST" Id="{dcb4004d-c8d2-4d22-a248-44f6a6dc5a3f}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM PRG_TEST
 VAR
-    _problem1Test : Problem1Test;
+    _problem1 : Problem1;
+    _problem1Test : FbProblemTester(_problem1, '233168');
+    _problem2 : Problem2;
+    _problem2Test : FbProblemTester(_problem2, '4613732');
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[TcUnit.RUN();]]></ST>
