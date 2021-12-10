@@ -1,14 +1,14 @@
 # TwinCAT meets Project Euler
 Welcome at the open source repository TwinCAT meets project Euler!  
-This repository contains a TwinCAT project which solves [Project Euler](https://projecteuler.net/) problems.  
+This repository contains a TwinCAT project written in Structured Text which solves [Project Euler](https://projecteuler.net/) problems.  
 I created this repository because I thought it would be fun to see how far _**we**_ can come with Structured Text.  
 But mostly because I hope that we learn some cool ST tips and tricks from each other while solving the problems. We perhaps might need some additional math functions/libraries as well..
 
 ## How does it work
-The project is a TwinCAT stand alone PLC project. The PLC project contains a base function block '[FbProblemSolverBase](ProjectEuler/POUs/Problems/Base/FbProblemSolverBase.TcPOU)' to solve the problems. The results are verified with [TCUnit](https://tcunit.org) in the main program 'PRG_TEST'.
+The project is a TwinCAT stand alone PLC project. The PLC project contains a base function block named '[FbProblemSolverBase](ProjectEuler/POUs/Problems/Base/FbProblemSolverBase.TcPOU)' which contains the base logic. The results are verified with [TCUnit](https://tcunit.org) in the main program 'PRG_TEST'.
 
 #### FbProblemSolverBase
-FbProblemSolverBase implements some logic to control states like 'Busy' and 'Done' and has a 'Execute' property to start the  problem solving process. The results are returned with a STRING property called: 'Result'.
+FbProblemSolverBase is loosely base on PLCOpens ETRIG pattern and implements some logic to control states like 'Busy' and 'Done' and has a 'Execute' property to start the problem solving process. The results are returned with a STRING property called: 'Result'.
 
 #### Problem solver function blocks
 All new problem solving function blocks should inherit from FbProblemSolverBase. In the new problem solving function block base simply call the base function block:
