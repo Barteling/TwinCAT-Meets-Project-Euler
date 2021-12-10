@@ -8,7 +8,7 @@ But mostly because I hope that we learn some cool ST tips and tricks from each o
 The project is a TwinCAT stand alone PLC project. The PLC project contains a base function block named '[FbProblemSolverBase](ProjectEuler/POUs/Problems/Base/FbProblemSolverBase.TcPOU)' which contains the base logic. The results are verified with [TCUnit](https://tcunit.org) in the main program 'PRG_TEST'.
 
 #### FbProblemSolverBase
-FbProblemSolverBase is loosely base on PLCOpens ETRIG pattern and implements some logic to control states like 'Busy' and 'Done' and has a 'Execute' property to start the problem solving process. The results are returned with a STRING property called: 'Result'.
+FbProblemSolverBase is loosely based on PLCOpens ETRIG pattern and implements some logic to control states like 'Busy' and 'Done' and has a 'Execute' property to start the problem solving process. The results are returned with a STRING property called: 'Result'.
 
 #### Problem solver function blocks
 All new problem solving function blocks should inherit from FbProblemSolverBase. In the new problem solving function block base simply call the base function block:
