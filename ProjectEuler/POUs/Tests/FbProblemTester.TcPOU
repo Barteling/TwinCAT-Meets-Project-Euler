@@ -10,9 +10,12 @@ END_VAR]]></Declaration>
       <ST><![CDATA[TEST(TestName := '');
 _problem.Execute := TRUE;
 _problem.Cyclic();
-AssertTrue(Condition := _problem.Done, Message := 'The problem solver did not finished within the expected amount of cycles.');
-AssertEquals_STRING(Expected := _expectedResult, Actual := _problem.Result, Message := 'The problem solver did not return the correct answer.');
-TEST_FINISHED();]]></ST>
+
+IF _problem.Done THEN
+    AssertEquals_STRING(Expected := _expectedResult, Actual := _problem.Result, Message := 'The problem solver did not return the correct answer.');
+    _problem.Execute := FALSE;
+    TEST_FINISHED();
+END_IF]]></ST>
     </Implementation>
     <Method Name="FB_init" Id="{bda51afe-9882-4a88-8aab-be632de375b5}">
       <Declaration><![CDATA[METHOD FB_init : BOOL
