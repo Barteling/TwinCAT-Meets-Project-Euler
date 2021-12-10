@@ -11,7 +11,7 @@ The project is a TwinCAT stand alone PLC project. The PLC project contains a bas
 FbProblemSolverBase implements some logic to control states like 'Busy' and 'Done' and has a 'Execute' property to start the  problem solving process. The results are returned with a STRING property called: 'Result'.
 
 #### Problem solver function blocks
-All new problem solving function blocks should inherit from FbProblemSolverBase. In the function block base simply call the base class:
+All new problem solving function blocks should inherit from FbProblemSolverBase. In the new problem solving function block base simply call the base function block:
 ```
 Super^();
 ```
@@ -60,3 +60,15 @@ END_VAR
 /- - - - FbProblemTester (FB)
 /- - - PRG_TEST (PRG)  
 ```
+## How can I run it
+This project is a stand alone project. To run it download the project and either in de same solution or in a different solution create a TwinCAT XAE project matching your hardware. Import the stand alone project as described [here](https://infosys.beckhoff.com/english.php?content=../content/1033/tc3_plc_intro/4278074763.html&id=) and you should be ready to run the PLC project!
+
+## Can I contribute
+Yes! The purpose of this project is to have some fun with Structured Text and learn from each other. Everyone is welcome to solve a problem.
+To solve a Project Euler problem follow these steps:
+ 1. Clone this repository
+ 2. Add a new function block which inherits from FbProblemSolverBase.
+ 3. Pick your problom from [Project Euler](https://projecteuler.net/) and implement your solution in the method Cyclic action.
+ 4. Add your function block to the test sequence in PRG_TEST
+ 5. Verify that all tests pass.
+ 6. Open a pull request with your additions.
