@@ -1,0 +1,11 @@
+<TcModuleRefactorInfos RefactorCnt="1">
+  <TcModuleRefactorInfo RefactorCnt="1" DateTime="2021-12-10T10:31:20">
+    <Renames>
+      <RenameTypeItem>
+        <Type>Problem1Test</Type>
+        <From>_expected</From>
+        <To>_expectedResult</To>
+      </RenameTypeItem>
+    </Renames>
+  </TcModuleRefactorInfo>
+</TcModuleRefactorInfos>
