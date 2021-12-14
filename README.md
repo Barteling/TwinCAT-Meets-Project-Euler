@@ -60,6 +60,9 @@ END_VAR
 /- - - - FbProblemTester (FB)
 /- - - PRG_TEST (PRG)  
 ```
+
+![project overview](https://user-images.githubusercontent.com/33071638/146077237-5340e938-023c-4fb5-a119-54aaaae6c4d2.PNG)
+
 ## How can I run it
 This project is a stand alone project. To run it download the project and either in de same solution or in a different solution create a TwinCAT XAE project matching your hardware. Import the stand alone project as described [here](https://infosys.beckhoff.com/english.php?content=../content/1033/tc3_plc_intro/4278074763.html&id=) and you should be ready to run the PLC project!
 
