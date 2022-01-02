@@ -7,9 +7,14 @@ VAR
     _problem1Test : FbProblemTester(_problem1, '233168');
     _problem2 : Problem2;
     _problem2Test : FbProblemTester(_problem2, '4613732');
+	_problem3 : Problem3;
+	_problem3Test : FbProblemTester(_problem3, '6857');
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[TcUnit.RUN();]]></ST>
     </Implementation>
+    <LineIds Name="PRG_TEST">
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

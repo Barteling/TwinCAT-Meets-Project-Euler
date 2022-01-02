@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.9">
+  <POU Name="Problem3" Id="{2e24f152-800d-4873-aaf5-8d02fd1ef81c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FINAL Problem3 EXTENDS FbProblemSolverBase
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[super^();]]></ST>
+    </Implementation>
+    <Method Name="CyclicAction" Id="{65fe1006-4f4e-49b8-a3eb-2f5cf2af60a3}">
+      <Declaration><![CDATA[METHOD PROTECTED  CyclicAction
+VAR_OUTPUT
+    complete : BOOL;
+    result : STRING;
+END_VAR
+VAR
+	_maxPrime : ULINT := 0;
+	_n : ULINT := 600851475143;
+	_i : ULINT := 5;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[(*Largest prime factor
+Problem 3
+The prime factors of 13195 are 5, 7, 13 and 29.
+What is the largest prime factor of the number 600851475143 ?
+*)
+
+WHILE _n MOD 2 = 0 DO
+	_maxPrime := 2;
+	_n := _n/2;
+END_WHILE
+
+WHILE _n MOD 3 = 0 DO
+	_maxPrime := 3;
+	_n := _n/3;
+END_WHILE
+
+WHILE _i <= TO_ULINT(SQRT(TO_REAL(_n))) DO
+	WHILE _n MOD _i = 0 DO
+		_maxPrime := _i;
+		_n := _n/_i;
+	END_WHILE
+	WHILE _n MOD (_i+2) = 0 DO
+		_maxPrime := _i+2;
+		_n := _n/(_i+2);
+	END_WHILE
+	_i := _i + 6;
+END_WHILE
+
+IF _n > 4 THEN
+	_maxPrime := _n;
+END_IF
+
+result := ULINT_TO_STRING(_maxPrime);
+complete := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="Problem3">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="Problem3.CyclicAction">
+      <LineId Id="71" Count="14" />
+      <LineId Id="91" Count="17" />
+      <LineId Id="57" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -48,6 +48,9 @@
     <Compile Include="POUs\Problems\Problem2.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\Problems\Problem3.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\Tests\FbProblemTester.TcPOU">
       <SubType>Code</SubType>
     </Compile>
